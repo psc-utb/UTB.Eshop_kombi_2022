@@ -8,7 +8,7 @@ using UTB.Eshop.Infrastructure.Database;
 namespace UTB.Eshop.Infrastructure.Migrations
 {
     [DbContext(typeof(EshopDbContext))]
-    [Migration("20221104095847_MySql_1.0.0_CarouselItem")]
+    [Migration("20221104104617_MySql_1.0.0_CarouselItem")]
     partial class MySql_100_CarouselItem
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,11 +28,13 @@ namespace UTB.Eshop.Infrastructure.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("ImageSrc")
-                        .HasColumnType("longtext");
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)");
 
                     b.HasKey("ID");
 
-                    b.ToTable("CarouselItems");
+                    b.ToTable("CarouselItem");
                 });
 #pragma warning restore 612, 618
         }

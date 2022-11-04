@@ -17,5 +17,12 @@ namespace UTB.Eshop.Infrastructure.Database
 
         }
 
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            DatabaseInit databaseInit = new DatabaseInit();
+            builder.Entity<CarouselItem>().HasData(databaseInit.CreateCarouselItems());
+        }
     }
 }

@@ -11,19 +11,19 @@ namespace UTB.Eshop.Infrastructure.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "CarouselItems",
+                name: "CarouselItem",
                 columns: table => new
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ImageSrc = table.Column<string>(type: "longtext", nullable: true)
+                    ImageSrc = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ImageAlt = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CarouselItems", x => x.ID);
+                    table.PrimaryKey("PK_CarouselItem", x => x.ID);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
         }
@@ -31,7 +31,7 @@ namespace UTB.Eshop.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CarouselItems");
+                name: "CarouselItem");
         }
     }
 }
