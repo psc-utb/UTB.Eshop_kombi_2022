@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using UTB.Eshop.Domain.Entities;
+using UTB.Eshop.Infrastructure.Database;
 using UTB.Eshop.Web.Models;
 
 namespace UTB.Eshop.Web.Controllers
@@ -12,15 +14,17 @@ namespace UTB.Eshop.Web.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        readonly EshopDbContext _eshopDbContext;
+        public HomeController(ILogger<HomeController> logger, EshopDbContext eshopDbContext)
         {
             _logger = logger;
+            _eshopDbContext = eshopDbContext;
         }
 
         public IActionResult Index()
         {
-            return View();
+            List<CarouselItem> carouselItems = _eshopDbContext.CarouselItems.ToList();
+            return View(carouselItems);
         }
 
         public IActionResult Privacy()
