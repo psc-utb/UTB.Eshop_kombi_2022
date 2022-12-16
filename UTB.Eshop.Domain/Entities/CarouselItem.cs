@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UTB.Eshop.Domain.Validation;
 
 namespace UTB.Eshop.Domain.Entities
 {
@@ -18,7 +19,7 @@ namespace UTB.Eshop.Domain.Entities
         [StringLength(255)]
         public string ImageSrc { get; set; }
 
-
+        [LowerCases]
         public string ImageAlt { get; set; }
     }
 }

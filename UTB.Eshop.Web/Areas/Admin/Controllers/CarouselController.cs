@@ -26,12 +26,16 @@ namespace UTB.Eshop.Web.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult Create(CarouselItem carouselItem)
         {
-            _eshopDbContext.Add(carouselItem);
-            _eshopDbContext.SaveChanges();
+            if (ModelState.IsValid)
+            {
+                _eshopDbContext.Add(carouselItem);
+                _eshopDbContext.SaveChanges();
 
+                return RedirectToAction(nameof(HomeController.Index), nameof(HomeController).Replace("Controller", String.Empty), new { area = String.Empty });
+                //return RedirectToAction("Index", "Home", new { area = "" });
+            }
 
-            return RedirectToAction(nameof(HomeController.Index), nameof(HomeController).Replace("Controller", String.Empty), new { area = String.Empty });
-            //return RedirectToAction("Index", "Home", new { area = "" });
+            return View(carouselItem);
         }
 
     }
