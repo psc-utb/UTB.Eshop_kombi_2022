@@ -9,6 +9,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using UTB.Eshop.Application.Abstraction;
+using UTB.Eshop.Application.Implementation;
 using UTB.Eshop.Infrastructure.Database;
 
 namespace UTB.Eshop.Web
@@ -26,6 +28,8 @@ namespace UTB.Eshop.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<EshopDbContext>(optionsBuilder => optionsBuilder.UseMySql(Configuration.GetConnectionString("MySql"), new MySqlServerVersion("8.0.26")));
+
+            services.AddScoped<ICarouselAppService, CarouselAppService>();
 
             services.AddControllersWithViews();
         }

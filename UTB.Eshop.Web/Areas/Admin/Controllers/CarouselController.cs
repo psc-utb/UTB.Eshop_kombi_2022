@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using UTB.Eshop.Application.Abstraction;
 using UTB.Eshop.Domain.Entities;
 using UTB.Eshop.Infrastructure.Database;
 using UTB.Eshop.Web.Controllers;
@@ -12,10 +13,10 @@ namespace UTB.Eshop.Web.Areas.Admin.Controllers
     [Area("Admin")]
     public class CarouselController : Controller
     {
-        readonly EshopDbContext _eshopDbContext;
-        public CarouselController(EshopDbContext eshopDbContext)
+        ICarouselAppService _carouselAppService;
+        public CarouselController(ICarouselAppService carouselAppService)
         {
-            _eshopDbContext = eshopDbContext;
+            _carouselAppService = carouselAppService;
         }
 
         public IActionResult Create()
@@ -28,8 +29,7 @@ namespace UTB.Eshop.Web.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                _eshopDbContext.Add(carouselItem);
-                _eshopDbContext.SaveChanges();
+                _carouselAppService.CreateCarouselItem(carouselItem);
 
                 return RedirectToAction(nameof(HomeController.Index), nameof(HomeController).Replace("Controller", String.Empty), new { area = String.Empty });
                 //return RedirectToAction("Index", "Home", new { area = "" });
